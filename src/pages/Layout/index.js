@@ -2,15 +2,17 @@
  * @Author: liyi
  * @LastEditors: liyi
  * @Date: 2023-04-29 21:04:53
- * @LastEditTime: 2023-05-04 21:10:16
+ * @LastEditTime: 2023-05-04 21:39:27
  */
 import { Layout, Menu, Popconfirm } from 'antd'
 import { HomeOutlined, DiffOutlined, EditOutlined, LogoutOutlined } from '@ant-design/icons'
+import { Outlet, Link, useLocation } from 'react-router-dom'
 import './index.scss'
 
 const { Header, Sider } = Layout
 
 const GeekLayout = () => {
+  const { pathname } = useLocation()
   return (
     <Layout>
       <Header className="header">
@@ -27,20 +29,20 @@ const GeekLayout = () => {
       </Header>
       <Layout>
         <Sider width={200} className="site-layout-background">
-          <Menu mode="inline" theme="dark" defaultSelectedKeys={['1']} style={{ height: '100%', borderRight: 0 }}>
-            <Menu.Item icon={<HomeOutlined />} key="1">
-              数据概览
+          <Menu mode="inline" theme="dark" defaultSelectedKeys={[pathname]} style={{ height: '100%', borderRight: 0 }}>
+            <Menu.Item icon={<HomeOutlined />} key="/">
+              <Link to={'/'}>数据概览</Link>
             </Menu.Item>
-            <Menu.Item icon={<DiffOutlined />} key="2">
-              内容管理
+            <Menu.Item icon={<DiffOutlined />} key="/article">
+              <Link to={'/article'}>内容管理</Link>
             </Menu.Item>
-            <Menu.Item icon={<EditOutlined />} key="3">
-              发布文章
+            <Menu.Item icon={<EditOutlined />} key="/publish">
+              <Link to={'/publish'}>发布文章</Link>
             </Menu.Item>
           </Menu>
         </Sider>
         <Layout className="layout-content" style={{ padding: 20 }}>
-          内容
+          <Outlet />
         </Layout>
       </Layout>
     </Layout>
