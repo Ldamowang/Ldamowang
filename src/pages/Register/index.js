@@ -2,26 +2,23 @@
  * @Author: liyi
  * @LastEditors: liyi
  * @Date: 2023-04-29 21:04:53
- * @LastEditTime: 2023-05-21 12:05:32
+ * @LastEditTime: 2023-05-13 19:56:57
  */
-import { Card, Form, Input, Button, message } from 'antd'
-import { NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import logo from '@/assets/logo.png'
+import { Card, Form, Input, Button, message } from 'antd'
 import './index.scss'
 import { useStore } from '@/store'
-// import LoginStore from '@/store/login.Store'
-function Login() {
+
+function Register() {
   const navigate = useNavigate()
-  const { loginStore } = useStore()
+  const { registerStore } = useStore()
   const onFinish = async (values) => {
-    console.log(values)
-    message.success('登录成功')
     const { username, password } = values
+
     try {
       console.log(username, password)
-      await loginStore.login({ name: username, password })
-      navigate('/')
+      await registerStore.register({ name: username, password })
+      navigate('/login')
     } catch (e) {
       message.error(e.response?.data?.message || '登录失败')
     }
@@ -32,7 +29,7 @@ function Login() {
   return (
     <div className="login">
       <Card className="login-container">
-        <img className="login-logo" src={logo} alt="" />
+        <h1 className="title">注册页面</h1>
         {/* 登录表单 */}
         <Form
           name="basic"
@@ -50,7 +47,6 @@ function Login() {
           }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          autoComplete="off"
         >
           <Form.Item
             label="Username"
@@ -64,6 +60,7 @@ function Login() {
           >
             <Input />
           </Form.Item>
+
           <Form.Item
             label="Password"
             name="password"
@@ -76,7 +73,6 @@ function Login() {
           >
             <Input.Password />
           </Form.Item>
-
           <Form.Item
             wrapperCol={{
               offset: 8,
@@ -87,21 +83,9 @@ function Login() {
               Submit
             </Button>
           </Form.Item>
-          <Form.Item
-            name="remember"
-            valuePropName="checked"
-            wrapperCol={{
-              offset: 8,
-              span: 16
-            }}
-          >
-            <NavLink to="/register">
-              <span>暂无账号，去申请</span>
-            </NavLink>
-          </Form.Item>
         </Form>
       </Card>
     </div>
   )
 }
-export default Login
+export default Register

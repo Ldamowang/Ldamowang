@@ -2,15 +2,17 @@
  * @Author: liyi
  * @LastEditors: liyi
  * @Date: 2023-04-29 14:08:10
- * @LastEditTime: 2023-04-29 22:37:11
+ * @LastEditTime: 2023-05-13 13:20:01
  */
 import React from 'react'
 import LoginStore from './login.Store'
+import RegisterStore from './register.store'
 
 class RootStore {
   // 组合模块
   constructor() {
     this.loginStore = new LoginStore()
+    this.registerStore = new RegisterStore()
   }
 }
 // 导入useStore方法供组件使用数据
