@@ -2,13 +2,12 @@
  * @Author: liyi
  * @LastEditors: liyi
  * @Date: 2023-04-29 22:27:44
- * @LastEditTime: 2023-05-13 17:32:07
+ * @LastEditTime: 2023-05-21 18:59:31
  */
 import axios from 'axios'
 
 const http = axios.create({
-  // baseURL: 'http://localhost:8080',
-  baseURL: 'http://112.124.27.151:8081',
+  baseURL: 'http://localhost:8080',
   timeout: 5000
 })
 // 添加请求拦截器
